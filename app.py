@@ -1,9 +1,12 @@
+
 from flask import Flask, render_template, request, redirect, url_for, flash, session
 from database import get_db_connection
+from config import Config
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
-app.secret_key = "knowledgehub-development-key"
+app.config.from_object(Config)
+
 # --------------------------------
 # HOME PAGE
 # --------------------------------
@@ -388,7 +391,7 @@ def projects():
 
     try:
         connection = get_db_connection()
-        cursor = connection.cursor(dictionary=True)
+        cursor = connection.cursor(dictionary=True, buffered=True)
 
         if request.method == "POST":
 
@@ -400,34 +403,59 @@ def projects():
             end_date = request.form.get("end_date") or None
 
             if project_title:
+
+                # Check whether the project already exists
                 cursor.execute(
                     """
-                    INSERT INTO projects
-                    (
-                        employee_id,
-                        project_title,
-                        project_description,
-                        technologies_used,
-                        role_in_project,
-                        start_date,
-                        end_date
-                    )
-                    VALUES (%s, %s, %s, %s, %s, %s, %s)
+                    SELECT project_id
+                    FROM projects
+                    WHERE employee_id = %s
+                    AND LOWER(TRIM(project_title)) = LOWER(%s)
                     """,
                     (
                         session["employee_id"],
-                        project_title,
-                        project_description,
-                        technologies_used,
-                        role_in_project,
-                        start_date,
-                        end_date
+                        project_title
                     )
                 )
 
-                connection.commit()
-                flash("Project added successfully!")
+                existing_project = cursor.fetchone()
 
+                if existing_project:
+                    flash("This project already exists in your profile!")
+
+                else:
+                    cursor.execute(
+                        """
+                        INSERT INTO projects
+                        (
+                            employee_id,
+                            project_title,
+                            project_description,
+                            technologies_used,
+                            role_in_project,
+                            start_date,
+                            end_date
+                        )
+                        VALUES (%s, %s, %s, %s, %s, %s, %s)
+                        """,
+                        (
+                            session["employee_id"],
+                            project_title,
+                            project_description,
+                            technologies_used,
+                            role_in_project,
+                            start_date,
+                            end_date
+                        )
+                    )
+
+                    connection.commit()
+                    flash("Project added successfully!")
+
+            else:
+                flash("Please enter a project title.")
+
+        # Retrieve all projects
         cursor.execute(
             """
             SELECT *
@@ -446,6 +474,7 @@ def projects():
         )
 
     except Exception as error:
+
         if connection:
             connection.rollback()
 
@@ -453,6 +482,7 @@ def projects():
         return "Unable to load projects."
 
     finally:
+
         if cursor:
             cursor.close()
 
@@ -473,37 +503,65 @@ def certifications():
 
     try:
         connection = get_db_connection()
-        cursor = connection.cursor(dictionary=True)
+        cursor = connection.cursor(dictionary=True, buffered=True)
 
         if request.method == "POST":
 
             certification_name = request.form.get("certification_name", "").strip()
             issuing_organization = request.form.get("issuing_organization", "").strip()
-            certificate_url = request.form.get("certificate_url", "").strip()
+            certificate_url = request.form.get("credential_url", "").strip()
 
             if certification_name:
+
+                # Check whether the certification already exists
                 cursor.execute(
                     """
-                    INSERT INTO certifications
-                    (
-                        employee_id,
-                        certification_name,
-                        issuing_organization,
-                        credential_url
-                    )
-                    VALUES (%s, %s, %s, %s)
+                    SELECT 1
+                    FROM certifications
+                    WHERE employee_id = %s
+                    AND LOWER(TRIM(certification_name)) = LOWER(%s)
+                    AND LOWER(TRIM(COALESCE(issuing_organization, ''))) = LOWER(%s)
+                    LIMIT 1
                     """,
                     (
                         session["employee_id"],
                         certification_name,
-                        issuing_organization,
-                        certificate_url
+                        issuing_organization
                     )
                 )
 
-                connection.commit()
-                flash("Certification added successfully!")
+                existing_certification = cursor.fetchone()
 
+                if existing_certification:
+                    flash("This certification from this organization already exists!")
+
+                else:
+                    cursor.execute(
+                        """
+                        INSERT INTO certifications
+                        (
+                            employee_id,
+                            certification_name,
+                            issuing_organization,
+                            credential_url
+                        )
+                        VALUES (%s, %s, %s, %s)
+                        """,
+                        (
+                            session["employee_id"],
+                            certification_name,
+                            issuing_organization,
+                            certificate_url
+                        )
+                    )
+
+                    connection.commit()
+                    flash("Certification added successfully!")
+
+            else:
+                flash("Please enter a certification name.")
+
+        # Retrieve all certifications
         cursor.execute(
             """
             SELECT *
@@ -522,6 +580,7 @@ def certifications():
         )
 
     except Exception as error:
+
         if connection:
             connection.rollback()
 
@@ -529,6 +588,7 @@ def certifications():
         return "Unable to load certifications."
 
     finally:
+
         if cursor:
             cursor.close()
 
@@ -633,6 +693,7 @@ def articles():
 
         if connection and connection.is_connected():
             connection.close()
+
 # --------------------------------
 # QUESTIONS AND ANSWERS
 # --------------------------------
@@ -648,7 +709,7 @@ def questions():
 
     try:
         connection = get_db_connection()
-        cursor = connection.cursor(dictionary=True)
+        cursor = connection.cursor(dictionary=True, buffered=True)
 
         if request.method == "POST":
 
@@ -706,6 +767,8 @@ def questions():
                 else:
                     flash("Please enter your answer.")
 
+        # FETCH ALL QUESTIONS
+
         cursor.execute(
             """
             SELECT
@@ -721,6 +784,8 @@ def questions():
 
         all_questions = cursor.fetchall()
 
+        # FETCH ANSWERS AND THEIR UPVOTE DETAILS
+
         for question in all_questions:
 
             cursor.execute(
@@ -728,17 +793,61 @@ def questions():
                 SELECT
                     answers.*,
                     employees.full_name,
-                    employees.designation
+                    employees.designation,
+
+                    (
+                        SELECT COUNT(*)
+                        FROM answer_upvotes
+                        WHERE answer_upvotes.answer_id = answers.answer_id
+                    ) AS upvote_count,
+
+                    (
+                        SELECT COUNT(*)
+                        FROM answer_upvotes
+                        WHERE answer_upvotes.answer_id = answers.answer_id
+                        AND answer_upvotes.employee_id = %s
+                    ) AS has_upvoted
+
                 FROM answers
+
                 JOIN employees
                 ON answers.employee_id = employees.employee_id
+
                 WHERE answers.question_id = %s
+
                 ORDER BY answers.created_at ASC
                 """,
-                (question["question_id"],)
+                (
+                    session["employee_id"],
+                    question["question_id"]
+                )
             )
 
             question["answers"] = cursor.fetchall()
+
+            # FETCH EMPLOYEES WHO UPVOTED EACH ANSWER
+
+            for answer in question["answers"]:
+
+                cursor.execute(
+                    """
+                    SELECT employees.full_name
+                    FROM answer_upvotes
+
+                    JOIN employees
+                    ON answer_upvotes.employee_id = employees.employee_id
+
+                    WHERE answer_upvotes.answer_id = %s
+
+                    ORDER BY answer_upvotes.created_at ASC
+                    """,
+                    (answer["answer_id"],)
+                )
+
+                answer["upvoted_by"] = [
+                    employee["full_name"]
+                    for employee in cursor.fetchall()
+                ]
 
         return render_template(
             "questions.html",

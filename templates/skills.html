@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -44,20 +45,20 @@
 
         <h2>Your Added Skills</h2>
 
-        {% if employee_skills %}
-        {% for skill in employee_skills %}
+        {% if all_skills %}
+            {% for skill in all_skills %}
 
-        <div class="dashboard-card">
-            <h3>{{ skill.skill_name }}</h3>
-            <p>
-                Proficiency:
-                {{ skill.proficiency_level }}
-            </p>
-        </div>
+            <div class="dashboard-card">
+                <h3>{{ skill.skill_name }}</h3>
+                <p>
+                    Proficiency:
+                    {{ skill.proficiency_level }}
+                </p>
+            </div>
 
-        {% endfor %}
+            {% endfor %}
         {% else %}
-        <p>You haven't added any skills yet.</p>
+            <p>You haven't added any skills yet.</p>
         {% endif %}
 
         <p class="back-link">
@@ -68,3 +69,4 @@
 </body>
 
 </html>
+```

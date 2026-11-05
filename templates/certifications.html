@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,36 +43,31 @@
 
         <h2>Your Certifications</h2>
 
-        {% if employee_certifications %}
-        {% for cert in employee_certifications %}
+        {% if all_certifications %}
+            {% for cert in all_certifications %}
 
-        <div class="dashboard-card">
+            <div class="dashboard-card">
 
-            <h3>{{ cert.certification_name }}</h3>
+                <h3>{{ cert.certification_name }}</h3>
 
-            <p>
-                <strong>Organization:</strong>
-                {{ cert.issuing_organization or "Not specified" }}
-            </p>
+                <p>
+                    <strong>Organization:</strong>
+                    {{ cert.issuing_organization or "Not specified" }}
+                </p>
 
-            
+                {% if cert.credential_url %}
+                <p>
+                    <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer">
+                        Verify Certificate
+                    </a>
+                </p>
+                {% endif %}
 
-            
+            </div>
 
-            
-            {% if cert.credential_url %}
-            <p>
-                <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer">
-                    Verify Certificate
-                </a>
-            </p>
-            {% endif %}
-
-        </div>
-
-        {% endfor %}
+            {% endfor %}
         {% else %}
-        <p>You haven't added any certifications yet.</p>
+            <p>You haven't added any certifications yet.</p>
         {% endif %}
 
         <p class="back-link">
@@ -83,3 +79,4 @@
 </body>
 
 </html>
+```

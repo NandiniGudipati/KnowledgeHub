@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -50,37 +51,37 @@
 
         <h2>Your Added Projects</h2>
 
-        {% if employee_projects %}
-        {% for project in employee_projects %}
+        {% if all_projects %}
+            {% for project in all_projects %}
 
-        <div class="dashboard-card">
-            <h3>{{ project.project_title }}</h3>
+            <div class="dashboard-card">
+                <h3>{{ project.project_title }}</h3>
 
-            <p>
-                {{ project.project_description or "No description added." }}
-            </p>
+                <p>
+                    {{ project.project_description or "No description added." }}
+                </p>
 
-            <p>
-                <strong>Technologies:</strong>
-                {{ project.technologies_used or "Not specified" }}
-            </p>
+                <p>
+                    <strong>Technologies:</strong>
+                    {{ project.technologies_used or "Not specified" }}
+                </p>
 
-            <p>
-                <strong>Your Role:</strong>
-                {{ project.role_in_project or "Not specified" }}
-            </p>
+                <p>
+                    <strong>Your Role:</strong>
+                    {{ project.role_in_project or "Not specified" }}
+                </p>
 
-            <p>
-                <strong>Duration:</strong>
-                {{ project.start_date or "Not specified" }}
-                to
-                {{ project.end_date or "Present" }}
-            </p>
-        </div>
+                <p>
+                    <strong>Duration:</strong>
+                    {{ project.start_date or "Not specified" }}
+                    to
+                    {{ project.end_date or "Present" }}
+                </p>
+            </div>
 
-        {% endfor %}
+            {% endfor %}
         {% else %}
-        <p>You haven't added any projects yet.</p>
+            <p>You haven't added any projects yet.</p>
         {% endif %}
 
         <p class="back-link">
@@ -91,3 +92,4 @@
 </body>
 
 </html>
+```

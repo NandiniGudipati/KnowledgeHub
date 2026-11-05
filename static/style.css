@@ -1009,3 +1009,28 @@ footer p {
     color: #59636B;
     line-height: 1.9;
 }
+/* Fix spacing and overlap in Questions & Answers */
+
+.answer-card {
+    display: block;
+    position: relative;
+    width: 100%;
+    box-sizing: border-box;
+    margin-top: 15px;
+    margin-bottom: 25px;
+    padding: 25px;
+    clear: both;
+}
+
+.answer-card p {
+    margin-bottom: 12px;
+    line-height: 1.6;
+}
+
+.answer-card form {
+    margin-top: 15px;
+}
+
+.answer-card button {
+    margin-top: 8px;
+}

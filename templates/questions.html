@@ -1,6 +1,6 @@
-
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -28,16 +28,16 @@
         <p>Ask questions, share knowledge and help other employees.</p>
 
         {% with messages = get_flashed_messages() %}
-            {% if messages %}
-                {% for message in messages %}
-                    <p>{{ message }}</p>
-                {% endfor %}
-            {% endif %}
+        {% if messages %}
+        {% for message in messages %}
+        <p>{{ message }}</p>
+        {% endfor %}
+        {% endif %}
         {% endwith %}
 
         <!-- ASK QUESTION -->
 
-        <div class="dashboard-card">
+        <div class="dashboard-card ">
 
             <h3>Ask a Question</h3>
 
@@ -47,21 +47,12 @@
 
                 <label>Question Title</label>
 
-                <input
-                    type="text"
-                    name="question_title"
-                    placeholder="Enter your question"
-                    required
-                >
+                <input type="text" name="question_title" placeholder="Enter your question" required>
 
                 <label>Question Description</label>
 
-                <textarea
-                    name="question_description"
-                    placeholder="Explain your question..."
-                    rows="4"
-                    required
-                ></textarea>
+                <textarea name="question_description" placeholder="Explain your question..." rows="4"
+                    required></textarea>
 
                 <button type="submit" class="register-btn">
                     Post Question
@@ -77,131 +68,124 @@
 
         {% if all_questions %}
 
-            {% for question in all_questions %}
+        {% for question in all_questions %}
 
-                <div class="dashboard-card">
+        <div class="dashboard-card">
 
-                    <h3>{{ question.question_title }}</h3>
+            <h3>{{ question.question_title }}</h3>
 
-                    <p>{{ question.question_description }}</p>
+            <p>{{ question.question_description }}</p>
 
-                    <p>
-                        <strong>Asked by:</strong>
-                        {{ question.full_name }}
-                    </p>
+            <p>
+                <strong>Asked by:</strong>
+                {{ question.full_name }}
+            </p>
 
-                    <p>
-                        <strong>Designation:</strong>
-                        {{ question.designation or 'Not specified' }}
-                    </p>
+            <p>
+                <strong>Designation:</strong>
+                {{ question.designation or 'Not specified' }}
+            </p>
 
-                    <p>
-                        <small>{{ question.created_at }}</small>
-                    </p>
+            <p>
+                <small>{{ question.created_at }}</small>
+            </p>
 
-                    <hr>
+            <hr>
 
-                    <!-- ANSWERS -->
+            <!-- ANSWERS -->
 
-                    <h4>Answers</h4>
+            <h4>Answers</h4>
 
-                    {% if question.answers %}
+            {% if question.answers %}
 
-                        {% for answer in question.answers %}
+            {% for answer in question.answers %}
 
-                            <div class="dashboard-card">
+            <div class="dashboard-card answer-card">
 
-                                <p>{{ answer.answer_description }}</p>
+                <p>{{ answer.answer_description }}</p>
 
-                                <p>
-                                    <strong>Answered by:</strong>
-                                    {{ answer.full_name }}
-                                </p>
+                <p>
+                    <strong>Answered by:</strong>
+                    {{ answer.full_name }}
+                </p>
 
-                                <p>
-                                    <strong>Designation:</strong>
-                                    {{ answer.designation or 'Not specified' }}
-                                </p>
+                <p>
+                    <strong>Designation:</strong>
+                    {{ answer.designation or 'Not specified' }}
+                </p>
 
-                                <p>
-                                    <small>{{ answer.created_at }}</small>
-                                </p>
+                <p>
+                    <small>{{ answer.created_at }}</small>
+                </p>
 
-                                <p>
-                                    👍 {{ answer.upvote_count }} Upvotes
-                                </p>
+                <p>
+                    👍 {{ answer.upvote_count }} Upvotes
+                </p>
+                <p>
+                    <strong>Upvoted by:</strong>
 
-                                {% if answer.has_upvoted %}
-
-                                    <button type="button" disabled>
-                                        ✓ Upvoted
-                                    </button>
-
-                                {% else %}
-
-                                    <form
-                                        method="POST"
-                                        action="{{ url_for('upvote_answer', answer_id=answer.answer_id) }}"
-                                    >
-                                        <button type="submit" class="register-btn">
-                                            👍 Upvote Answer
-                                        </button>
-                                    </form>
-
-                                {% endif %}
-
-                            </div>
-
-                        {% endfor %}
-
+                    {% if answer.upvoted_by %}
+                    {{ answer.upvoted_by | join(', ') }}
                     {% else %}
-
-                        <p>No answers yet. Be the first to answer!</p>
-
+                    No one has upvoted yet.
                     {% endif %}
+                </p>
 
-                    <hr>
+                {% if answer.has_upvoted %}
 
-                    <!-- POST ANSWER -->
+                <button type="button" disabled>
+                    ✓ Upvoted
+                </button>
 
-                    <h4>Write an Answer</h4>
+                {% else %}
 
-                    <form method="POST" action="{{ url_for('questions') }}">
+                <form method="POST" action="{{ url_for('upvote_answer', answer_id=answer.answer_id) }}">
+                    <button type="submit" class="register-btn">
+                        👍 Upvote Answer
+                    </button>
+                </form>
 
-                        <input
-                            type="hidden"
-                            name="action"
-                            value="post_answer"
-                        >
+                {% endif %}
 
-                        <input
-                            type="hidden"
-                            name="question_id"
-                            value="{{ question.question_id }}"
-                        >
-
-                        <textarea
-                            name="answer_description"
-                            placeholder="Write your answer..."
-                            rows="3"
-                            required
-                        ></textarea>
-
-                        <button type="submit" class="register-btn">
-                            Post Answer
-                        </button>
-
-                    </form>
-
-                </div>
+            </div>
 
             {% endfor %}
 
+            {% else %}
+
+            <p>No answers yet. Be the first to answer!</p>
+
+            {% endif %}
+
+            <hr>
+
+            <!-- POST ANSWER -->
+
+            <h4>Write an Answer</h4>
+
+            <form method="POST" action="{{ url_for('questions') }}">
+
+                <input type="hidden" name="action" value="post_answer">
+
+                <input type="hidden" name="question_id" value="{{ question.question_id }}">
+
+                <textarea name="answer_description" placeholder="Write your answer..." rows="3" required></textarea>
+
+                <button type="submit" class="register-btn">
+                    Post Answer
+                </button>
+
+            </form>
+
+        </div>
+
+        {% endfor %}
+
         {% else %}
 
-            <div class="dashboard-card">
-                <p>No questions have been posted yet.</p>
-            </div>
+        <div class="dashboard-card">
+            <p>No questions have been posted yet.</p>
+        </div>
 
         {% endif %}
 
@@ -214,4 +198,5 @@
     </div>
 
 </body>
+
 </html>
