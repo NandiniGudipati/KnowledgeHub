@@ -1,0 +1,65 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Profile | KnowledgeHub</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="registration-container">
+
+        <h1>Edit Your Profile</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <div class="message">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <label>Department</label>
+            <input type="text"
+                   name="department"
+                   value="{{ employee.department or '' }}"
+                   placeholder="Enter your department">
+
+            <label>Designation</label>
+            <input type="text"
+                   name="designation"
+                   value="{{ employee.designation or '' }}"
+                   placeholder="Enter your designation">
+
+            <label>Years of Experience</label>
+            <input type="number"
+                   name="experience_years"
+                   min="0"
+                   value="{{ employee.experience_years or 0 }}"
+                   required>
+
+            <label>Professional Bio</label>
+            <textarea name="bio"
+                      rows="5"
+                      placeholder="Tell us about your professional experience">{{ employee.bio or '' }}</textarea>
+
+            <button type="submit" class="register-btn">
+                Save Profile
+            </button>
+
+        </form>
+
+        <p class="back-link">
+            <a href="{{ url_for('profile') }}">Cancel</a>
+        </p>
+
+    </div>
+
+</body>
+</html>

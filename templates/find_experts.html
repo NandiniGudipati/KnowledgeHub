@@ -1,0 +1,119 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Employee Experts | KnowledgeHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="dashboard-nav">
+        <h2>KnowledgeHub</h2>
+
+        <div class="dashboard-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('profile') }}">My Profile</a>
+            <a href="{{ url_for('logout') }}" class="nav-register">Logout</a>
+        </div>
+    </nav>
+
+    <div class="registration-container">
+
+        <h2>Find Employee Experts</h2>
+
+        <div class="dashboard-card">
+
+            <h3>Search Employees by Skills</h3>
+
+            <p>
+                Find employees who have expertise in a particular
+                technology or skill.
+            </p>
+
+            <form method="GET" action="{{ url_for('find_experts') }}">
+
+                <label for="skill">Enter Skill</label>
+
+                <input
+                    type="text"
+                    id="skill"
+                    name="skill"
+                    placeholder="Example: Python, SQL, Java"
+                    value="{{ search_skill }}"
+                    required
+                >
+
+                <button type="submit" class="register-btn">
+                    Search Experts
+                </button>
+
+            </form>
+
+        </div>
+
+        {% if search_skill %}
+
+            <h3>Search Results for "{{ search_skill }}"</h3>
+
+            {% if employees %}
+
+                {% for employee in employees %}
+
+                    <div class="dashboard-card">
+
+                        <h3>{{ employee.full_name }}</h3>
+
+                        <p>
+                            <strong>Designation:</strong>
+                            {{ employee.designation or 'Not specified' }}
+                        </p>
+
+                        <p>
+                            <strong>Department:</strong>
+                            {{ employee.department or 'Not specified' }}
+                        </p>
+
+                        <p>
+                            <strong>Experience:</strong>
+                            {{ employee.experience_years or 0 }} years
+                        </p>
+
+                        <p>
+                            <strong>Skills:</strong>
+                            {{ employee.skills or 'Not specified' }}
+                        </p>
+
+                        <p>
+                            <strong>Expertise Match Score:</strong>
+                            {{ employee.match_score }} matching skill(s)
+                        </p>
+
+                    </div>
+
+                {% endfor %}
+
+            {% else %}
+
+                <div class="dashboard-card">
+                    <p>No employees found with this skill.</p>
+                </div>
+
+            {% endif %}
+
+        {% endif %}
+
+        <br>
+
+        <a href="{{ url_for('dashboard') }}" class="nav-register">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+</html>

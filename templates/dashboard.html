@@ -1,0 +1,352 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard | KnowledgeHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+        /* DASHBOARD CARD ICONS */
+
+        .dashboard-card {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .dashboard-icon {
+            width: 58px;
+            height: 58px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 14px;
+            margin-bottom: 20px;
+        }
+
+        .dashboard-icon svg {
+            width: 30px;
+            height: 30px;
+            stroke: currentColor;
+            stroke-width: 1.8;
+            fill: none;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+
+        .icon-burgundy {
+            background: #F1E8E8;
+            color: #713B4A;
+        }
+
+        .icon-navy {
+            background: #E8EDF0;
+            color: #263B50;
+        }
+
+        .icon-sage {
+            background: #E8EEE9;
+            color: #789184;
+        }
+
+        .icon-beige {
+            background: #F2EDE5;
+            color: #92775A;
+        }
+
+        .dashboard-card h3 {
+            margin-bottom: 10px;
+        }
+
+        .dashboard-card .nav-register {
+            display: inline-block;
+            text-decoration: none;
+        }
+
+        @media (max-width: 480px) {
+            .dashboard-icon {
+                width: 52px;
+                height: 52px;
+            }
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+
+    <nav class="dashboard-nav">
+
+        <h2>KnowledgeHub</h2>
+
+        <div class="dashboard-links">
+
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+
+            <a href="{{ url_for('profile') }}">My Profile</a>
+
+            <a href="{{ url_for('articles') }}">Knowledge</a>
+
+            <a href="{{ url_for('find_experts') }}">Find Experts</a>
+
+            <a href="{{ url_for('questions') }}">Questions</a>
+
+            <a href="{{ url_for('logout') }}" class="nav-register">
+                Logout
+            </a>
+
+        </div>
+
+    </nav>
+
+
+    <!-- Dashboard Content -->
+
+    <main class="dashboard-container">
+
+        <!-- Welcome Section -->
+
+        <section class="welcome-section">
+
+            <div>
+
+                <h1>Welcome, {{ employee_name }}!</h1>
+
+                <p>
+                    Discover knowledge, share expertise and
+                    connect with professionals.
+                </p>
+
+            </div>
+
+        </section>
+
+
+        <h2 class="section-heading">Your Workspace</h2>
+
+
+        <!-- Dashboard Cards -->
+
+        <section class="dashboard-grid">
+
+
+            <!-- My Expertise Profile -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon icon-navy">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M5 21v-2a7 7 0 0 1 14 0v2"></path>
+                        <path d="m16 11 2 2 4-4"></path>
+                    </svg>
+                </div>
+
+                <h3>My Expertise Profile</h3>
+
+                <p>
+                    View your professional information, technical skills,
+                    projects and certifications in one place.
+                </p>
+
+                <a href="{{ url_for('my_expertise') }}" class="nav-register">
+                    View My Expertise
+                </a>
+
+            </div>
+
+
+            <!-- My Skills -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon icon-sage">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M12 3 3 8l9 5 9-5-9-5Z"></path>
+                        <path d="m3 12 9 5 9-5"></path>
+                        <path d="m3 16 9 5 9-5"></path>
+                    </svg>
+                </div>
+
+                <h3>My Skills</h3>
+
+                <p>
+                    Add technologies and areas of expertise.
+                </p>
+
+                <a href="{{ url_for('skills') }}" class="nav-register">
+                    Manage Skills
+                </a>
+
+            </div>
+
+
+            <!-- My Projects -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon icon-beige">
+                    <svg viewBox="0 0 24 24">
+                        <rect x="3" y="7" width="18" height="14" rx="2"></rect>
+                        <path d="M8 7V4h8v3"></path>
+                        <path d="M3 12h18"></path>
+                        <path d="M10 12v2h4v-2"></path>
+                    </svg>
+                </div>
+
+                <h3>My Projects</h3>
+
+                <p>
+                    Showcase projects you have worked on.
+                </p>
+
+                <a href="{{ url_for('projects') }}" class="nav-register">
+                    Manage Projects
+                </a>
+
+            </div>
+
+
+            <!-- Certifications -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon icon-burgundy">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="12" cy="8" r="6"></circle>
+                        <path d="m8 13-1 8 5-3 5 3-1-8"></path>
+                        <path d="m9.5 8 1.5 1.5 3-3"></path>
+                    </svg>
+                </div>
+
+                <h3>Certifications</h3>
+
+                <p>
+                    Display your professional certifications.
+                </p>
+
+                <a href="{{ url_for('certifications') }}" class="nav-register">
+                    Manage Certifications
+                </a>
+
+            </div>
+
+
+            <!-- Knowledge Articles -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon icon-sage">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M4 4.5A2.5 2.5 0 0 1 6.5 2H20v18H6.5A2.5 2.5 0 0 1 4 17.5Z"></path>
+                        <path d="M4 17.5A2.5 2.5 0 0 1 6.5 15H20"></path>
+                        <path d="M8 6h8"></path>
+                        <path d="M8 9h8"></path>
+                    </svg>
+                </div>
+
+                <h3>Knowledge Articles</h3>
+
+                <p>
+                    Share and explore technical knowledge articles.
+                </p>
+
+                <a href="{{ url_for('articles') }}" class="nav-register">
+                    Share Knowledge
+                </a>
+
+            </div>
+
+
+            <!-- Find Employee Experts -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon icon-navy">
+                    <svg viewBox="0 0 24 24">
+                        <circle cx="10.5" cy="8" r="4"></circle>
+                        <path d="M3 21v-2a7.5 7.5 0 0 1 12-6"></path>
+                        <circle cx="18" cy="17" r="3"></circle>
+                        <path d="m20.2 19.2 2 2"></path>
+                    </svg>
+                </div>
+
+                <h3>Find Employee Experts</h3>
+
+                <p>
+                    Search for employees based on their technical skills
+                    and experience.
+                </p>
+
+                <a href="{{ url_for('find_experts') }}" class="nav-register">
+                    Find Experts
+                </a>
+
+            </div>
+
+
+            <!-- Questions and Answers -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon icon-beige">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M21 11.5a8.5 8.5 0 0 1-12.5 7.5L3 21l2-5.5A8.5 8.5 0 1 1 21 11.5Z"></path>
+                        <path d="M8 10h8"></path>
+                        <path d="M8 14h5"></path>
+                    </svg>
+                </div>
+
+                <h3>Questions & Answers</h3>
+
+                <p>
+                    Ask technical questions and get answers
+                    from other employees.
+                </p>
+
+                <a href="{{ url_for('questions') }}" class="nav-register">
+                    Open Q&A
+                </a>
+
+            </div>
+
+
+            <!-- My Contributions -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon icon-burgundy">
+                    <svg viewBox="0 0 24 24">
+                        <path d="M3 3v18h18"></path>
+                        <path d="m7 14 4-4 4 3 6-7"></path>
+                        <path d="M16 6h5v5"></path>
+                    </svg>
+                </div>
+
+                <h3>My Contributions</h3>
+
+                <p>
+                    Track your knowledge articles, questions, answers
+                    and contributions to the KnowledgeHub community.
+                </p>
+
+                <a href="{{ url_for('my_contributions') }}" class="nav-register">
+                    View My Contributions
+                </a>
+
+            </div>
+
+
+        </section>
+
+    </main>
+
+</body>
+
+</html>

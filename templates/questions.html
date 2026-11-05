@@ -1,0 +1,217 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questions & Answers | KnowledgeHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="dashboard-nav">
+        <h2>KnowledgeHub</h2>
+
+        <div class="dashboard-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('profile') }}">My Profile</a>
+            <a href="{{ url_for('logout') }}" class="nav-register">Logout</a>
+        </div>
+    </nav>
+
+    <div class="registration-container">
+
+        <h2>Questions & Answers</h2>
+
+        <p>Ask questions, share knowledge and help other employees.</p>
+
+        {% with messages = get_flashed_messages() %}
+            {% if messages %}
+                {% for message in messages %}
+                    <p>{{ message }}</p>
+                {% endfor %}
+            {% endif %}
+        {% endwith %}
+
+        <!-- ASK QUESTION -->
+
+        <div class="dashboard-card">
+
+            <h3>Ask a Question</h3>
+
+            <form method="POST" action="{{ url_for('questions') }}">
+
+                <input type="hidden" name="action" value="ask_question">
+
+                <label>Question Title</label>
+
+                <input
+                    type="text"
+                    name="question_title"
+                    placeholder="Enter your question"
+                    required
+                >
+
+                <label>Question Description</label>
+
+                <textarea
+                    name="question_description"
+                    placeholder="Explain your question..."
+                    rows="4"
+                    required
+                ></textarea>
+
+                <button type="submit" class="register-btn">
+                    Post Question
+                </button>
+
+            </form>
+
+        </div>
+
+        <!-- DISPLAY QUESTIONS -->
+
+        <h3>Community Questions</h3>
+
+        {% if all_questions %}
+
+            {% for question in all_questions %}
+
+                <div class="dashboard-card">
+
+                    <h3>{{ question.question_title }}</h3>
+
+                    <p>{{ question.question_description }}</p>
+
+                    <p>
+                        <strong>Asked by:</strong>
+                        {{ question.full_name }}
+                    </p>
+
+                    <p>
+                        <strong>Designation:</strong>
+                        {{ question.designation or 'Not specified' }}
+                    </p>
+
+                    <p>
+                        <small>{{ question.created_at }}</small>
+                    </p>
+
+                    <hr>
+
+                    <!-- ANSWERS -->
+
+                    <h4>Answers</h4>
+
+                    {% if question.answers %}
+
+                        {% for answer in question.answers %}
+
+                            <div class="dashboard-card">
+
+                                <p>{{ answer.answer_description }}</p>
+
+                                <p>
+                                    <strong>Answered by:</strong>
+                                    {{ answer.full_name }}
+                                </p>
+
+                                <p>
+                                    <strong>Designation:</strong>
+                                    {{ answer.designation or 'Not specified' }}
+                                </p>
+
+                                <p>
+                                    <small>{{ answer.created_at }}</small>
+                                </p>
+
+                                <p>
+                                    👍 {{ answer.upvote_count }} Upvotes
+                                </p>
+
+                                {% if answer.has_upvoted %}
+
+                                    <button type="button" disabled>
+                                        ✓ Upvoted
+                                    </button>
+
+                                {% else %}
+
+                                    <form
+                                        method="POST"
+                                        action="{{ url_for('upvote_answer', answer_id=answer.answer_id) }}"
+                                    >
+                                        <button type="submit" class="register-btn">
+                                            👍 Upvote Answer
+                                        </button>
+                                    </form>
+
+                                {% endif %}
+
+                            </div>
+
+                        {% endfor %}
+
+                    {% else %}
+
+                        <p>No answers yet. Be the first to answer!</p>
+
+                    {% endif %}
+
+                    <hr>
+
+                    <!-- POST ANSWER -->
+
+                    <h4>Write an Answer</h4>
+
+                    <form method="POST" action="{{ url_for('questions') }}">
+
+                        <input
+                            type="hidden"
+                            name="action"
+                            value="post_answer"
+                        >
+
+                        <input
+                            type="hidden"
+                            name="question_id"
+                            value="{{ question.question_id }}"
+                        >
+
+                        <textarea
+                            name="answer_description"
+                            placeholder="Write your answer..."
+                            rows="3"
+                            required
+                        ></textarea>
+
+                        <button type="submit" class="register-btn">
+                            Post Answer
+                        </button>
+
+                    </form>
+
+                </div>
+
+            {% endfor %}
+
+        {% else %}
+
+            <div class="dashboard-card">
+                <p>No questions have been posted yet.</p>
+            </div>
+
+        {% endif %}
+
+        <br>
+
+        <a href="{{ url_for('dashboard') }}" class="nav-register">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+</html>

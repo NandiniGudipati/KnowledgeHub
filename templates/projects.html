@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects | KnowledgeHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="registration-container">
+        <h1>My Projects</h1>
+        <p>Showcase the projects you have worked on.</p>
+
+        {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <div class="message">{{ message }}</div>
+        {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <label>Project Title</label>
+            <input type="text" name="project_title" placeholder="Enter project title" required>
+
+            <label>Project Description</label>
+            <textarea name="project_description" rows="4" placeholder="Describe your project"></textarea>
+
+            <label>Technologies Used</label>
+            <input type="text" name="technologies_used" placeholder="Example: Python, Flask, MySQL">
+
+            <label>Your Role</label>
+            <input type="text" name="role_in_project" placeholder="Example: Backend Developer">
+
+            <label>Start Date</label>
+            <input type="date" name="start_date">
+
+            <label>End Date</label>
+            <input type="date" name="end_date">
+
+            <button type="submit" class="register-btn">
+                Add Project
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h2>Your Added Projects</h2>
+
+        {% if employee_projects %}
+        {% for project in employee_projects %}
+
+        <div class="dashboard-card">
+            <h3>{{ project.project_title }}</h3>
+
+            <p>
+                {{ project.project_description or "No description added." }}
+            </p>
+
+            <p>
+                <strong>Technologies:</strong>
+                {{ project.technologies_used or "Not specified" }}
+            </p>
+
+            <p>
+                <strong>Your Role:</strong>
+                {{ project.role_in_project or "Not specified" }}
+            </p>
+
+            <p>
+                <strong>Duration:</strong>
+                {{ project.start_date or "Not specified" }}
+                to
+                {{ project.end_date or "Present" }}
+            </p>
+        </div>
+
+        {% endfor %}
+        {% else %}
+        <p>You haven't added any projects yet.</p>
+        {% endif %}
+
+        <p class="back-link">
+            <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+        </p>
+    </div>
+
+</body>
+
+</html>

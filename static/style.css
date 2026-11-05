@@ -1,0 +1,1011 @@
+
+/* =========================================
+   KNOWLEDGEHUB - REFINED COLOR THEME
+   Burgundy + Navy + Sage + Ivory
+   Fully Responsive Design
+========================================= */
+
+:root {
+    --burgundy: #713B4A;
+    --navy: #263B50;
+    --sage: #789184;
+    --ivory: #F5F1E9;
+    --beige: #D9CBB8;
+    --white: #FFFFFF;
+
+    --text-dark: #303944;
+    --text-muted: #727B82;
+
+    --border: #D9CBB8;
+    --shadow: rgba(38, 59, 80, 0.08);
+}
+
+/* GENERAL STYLING */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: var(--ivory);
+    color: var(--text-dark);
+    overflow-x: hidden;
+}
+
+img {
+    max-width: 100%;
+}
+
+/* BUTTONS */
+
+button {
+    cursor: pointer;
+    border: none;
+    border-radius: 6px;
+    padding: 11px 22px;
+    font-size: 14px;
+    transition: all 0.3s ease;
+}
+
+.login-btn {
+    background: transparent;
+    color: var(--burgundy);
+    border: 1px solid var(--burgundy);
+}
+
+.login-btn:hover {
+    background: var(--burgundy);
+    color: var(--white);
+}
+
+.register-btn {
+    background: var(--burgundy);
+    color: var(--white);
+}
+
+.register-btn:hover {
+    background: var(--navy);
+}
+
+/* =========================================
+   MAIN NAVIGATION
+========================================= */
+
+.navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 25px;
+    padding: 14px 5%;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+}
+
+/* LOGO */
+
+.logo {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 12px;
+    flex-shrink: 0;
+    font-size: 25px;
+    font-weight: bold;
+    color: var(--navy);
+    white-space: nowrap;
+}
+
+.logo img {
+    height: 68px !important;
+    width: auto;
+    max-width: 100px;
+    object-fit: contain;
+}
+
+.logo span {
+    color: var(--burgundy);
+}
+
+/* NAVIGATION LINKS */
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 28px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: var(--navy);
+    font-size: 15px;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: var(--burgundy);
+}
+
+/* NAVIGATION BUTTONS */
+
+.nav-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.nav-buttons button,
+.nav-register {
+    display: inline-block;
+    padding: 11px 23px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    border: 2px solid var(--burgundy);
+    background: var(--burgundy);
+    color: var(--white);
+    transition: all 0.3s ease;
+}
+
+.nav-buttons button:hover,
+.nav-register:hover {
+    background: var(--navy);
+    border-color: var(--navy);
+    color: var(--white);
+}
+
+/* =========================================
+   HOMEPAGE HERO SECTION
+========================================= */
+
+.hero {
+    background: linear-gradient(
+        120deg,
+        var(--navy),
+        var(--sage)
+    );
+    color: var(--white);
+    padding: 100px 8%;
+    text-align: center;
+}
+
+.hero-content {
+    width: 100%;
+    max-width: 850px;
+    margin: auto;
+}
+
+.tagline {
+    color: var(--beige);
+    font-size: 13px;
+    letter-spacing: 3px;
+    margin-bottom: 20px;
+}
+
+.hero h1 {
+    font-size: 48px;
+    line-height: 1.2;
+    margin-bottom: 22px;
+}
+
+.hero-description {
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--ivory);
+    max-width: 650px;
+    margin: auto auto 30px;
+}
+
+/* HERO BUTTONS */
+
+.hero-content .nav-buttons {
+    justify-content: center;
+    margin-top: 25px;
+}
+
+/* =========================================
+   SEARCH COMPONENT
+   Retained for existing search functionality
+========================================= */
+
+.search-container {
+    display: flex;
+    max-width: 650px;
+    margin: auto;
+    background: var(--white);
+    padding: 7px;
+    border-radius: 8px;
+}
+
+.search-container input {
+    flex: 1;
+    min-width: 0;
+    border: none;
+    outline: none;
+    padding: 13px;
+    font-size: 15px;
+}
+
+.search-container button {
+    background: var(--burgundy);
+    color: var(--white);
+}
+
+.search-container button:hover {
+    background: var(--navy);
+}
+
+.search-hint {
+    font-size: 12px;
+    color: var(--ivory);
+    margin-top: 15px;
+}
+
+/* =========================================
+   FEATURES SECTION
+========================================= */
+
+.features {
+    padding: 80px 8%;
+    background: var(--ivory);
+}
+
+.section-heading {
+    text-align: center;
+    color: var(--navy);
+    margin-bottom: 45px;
+}
+
+.section-heading p {
+    color: var(--burgundy);
+    letter-spacing: 2px;
+    font-size: 12px;
+    margin-bottom: 12px;
+}
+
+.section-heading h2 {
+    font-size: 30px;
+    color: var(--navy);
+    line-height: 1.4;
+}
+
+.feature-container {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 22px;
+}
+
+.feature-card {
+    min-width: 0;
+    background: var(--white);
+    padding: 30px 22px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 4px 15px var(--shadow);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(38, 59, 80, 0.14);
+}
+
+.feature-icon {
+    font-size: 35px;
+    margin-bottom: 18px;
+}
+
+.feature-card h3 {
+    margin-bottom: 13px;
+    color: var(--burgundy);
+}
+
+.feature-card p {
+    color: var(--text-muted);
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* =========================================
+   ABOUT SECTION
+========================================= */
+
+.about {
+    text-align: center;
+    padding: 65px 10%;
+    background: #E8E9E2;
+}
+
+.about h2 {
+    color: var(--navy);
+    margin-bottom: 15px;
+    line-height: 1.4;
+}
+
+.about p {
+    color: var(--text-dark);
+    line-height: 1.7;
+    max-width: 850px;
+    margin: 12px auto;
+}
+
+/* =========================================
+   FOOTER
+========================================= */
+
+footer {
+    background: var(--navy);
+    color: var(--white);
+    text-align: center;
+    padding: 35px 15px;
+}
+
+footer .logo {
+    justify-content: center;
+    color: var(--white);
+    margin-bottom: 12px;
+}
+
+footer .logo img {
+    height: 52px !important;
+}
+
+footer .logo span {
+    color: var(--beige);
+}
+
+footer h3 {
+    margin-bottom: 10px;
+    color: var(--beige);
+}
+
+footer p {
+    color: var(--ivory);
+    font-size: 14px;
+}
+
+.copyright {
+    margin-top: 20px;
+    font-size: 12px;
+}
+
+/* =========================================
+   REGISTRATION AND FORM CONTAINERS
+========================================= */
+
+.registration-container {
+    width: 92%;
+    max-width: 480px;
+    margin: 55px auto;
+    padding: 35px;
+    background: var(--white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    box-shadow: 0 5px 20px var(--shadow);
+}
+
+.registration-container h1 {
+    color: var(--navy);
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.registration-container > p {
+    color: var(--text-muted);
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.registration-container label {
+    display: block;
+    margin: 15px 0 7px;
+    color: var(--navy);
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.registration-container input,
+.registration-container textarea,
+.registration-container select {
+    width: 100%;
+    max-width: 100%;
+    padding: 12px;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    outline: none;
+    font-size: 14px;
+    background: var(--white);
+    color: var(--text-dark);
+}
+
+.registration-container input:focus,
+.registration-container textarea:focus,
+.registration-container select:focus {
+    border-color: var(--sage);
+}
+
+.registration-container button {
+    width: 100%;
+    margin-top: 25px;
+    background: var(--burgundy);
+    color: var(--white);
+}
+
+.registration-container button:hover {
+    background: var(--navy);
+}
+
+.message {
+    background: #E8E9E2;
+    color: var(--navy);
+    padding: 12px;
+    border-radius: 6px;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.back-link {
+    margin-top: 20px;
+}
+
+.back-link a {
+    color: var(--burgundy);
+    text-decoration: none;
+}
+
+/* =========================================
+   EMPLOYEE DASHBOARD NAVIGATION
+========================================= */
+
+.dashboard-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 5%;
+    background: var(--white);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.dashboard-nav h2 {
+    color: var(--navy);
+}
+
+.dashboard-links {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.dashboard-links a {
+    color: var(--navy);
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 13px;
+}
+
+.dashboard-links a:hover {
+    color: var(--burgundy);
+}
+
+.dashboard-links .nav-register {
+    color: var(--white);
+}
+
+/* =========================================
+   DASHBOARD CONTENT
+========================================= */
+
+.dashboard-container {
+    width: 90%;
+    max-width: 1150px;
+    margin: 30px auto;
+}
+
+.welcome-section {
+    background: linear-gradient(
+        120deg,
+        #E8E9E2,
+        var(--ivory)
+    );
+    padding: 28px 32px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    margin-bottom: 28px;
+}
+
+.welcome-section h1 {
+    color: var(--burgundy);
+    font-size: 25px;
+    margin-bottom: 10px;
+}
+
+.welcome-section p {
+    color: var(--navy);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.dashboard-container > .section-heading {
+    text-align: left;
+    font-size: 21px;
+    margin-bottom: 20px;
+}
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 18px;
+}
+
+.dashboard-card {
+    min-width: 0;
+    background: var(--white);
+    padding: 20px;
+    border: 1px solid var(--border);
+    border-radius: 9px;
+    box-shadow: 0 3px 12px var(--shadow);
+    transition: transform 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(38, 59, 80, 0.14);
+}
+
+.dashboard-card h3 {
+    color: var(--burgundy);
+    font-size: 17px;
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.dashboard-card p {
+    color: var(--text-muted);
+    font-size: 13px;
+    line-height: 1.6;
+    min-height: 42px;
+    margin-bottom: 12px;
+}
+
+.dashboard-card span {
+    display: inline-block;
+    margin-top: 15px;
+    color: var(--sage);
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.dashboard-card .nav-register {
+    padding: 10px 22px;
+    font-size: 14px;
+    border-width: 2px;
+}
+
+/* =========================================
+   Q&A PAGE SPACING
+========================================= */
+
+.registration-container > h2 {
+    margin-top: 30px;
+    margin-bottom: 25px;
+}
+
+.registration-container > .dashboard-card {
+    margin-top: 25px;
+    margin-bottom: 25px;
+}
+
+/* =========================================
+   TABLET RESPONSIVENESS
+========================================= */
+
+@media (max-width: 1000px) {
+
+    .navbar {
+        flex-wrap: wrap;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 14px 4%;
+    }
+
+    .navbar .logo {
+        flex: 1 1 auto;
+    }
+
+    .navbar .nav-buttons {
+        flex: 0 1 auto;
+    }
+
+    .navbar .nav-links {
+        order: 3;
+        flex: 1 1 100%;
+        justify-content: center;
+        padding: 8px 0;
+    }
+
+    .feature-container {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+
+    .hero h1 {
+        font-size: 40px;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+/* =========================================
+   SMALL TABLETS AND LARGE PHONES
+========================================= */
+
+@media (max-width: 650px) {
+
+    .navbar {
+        flex-direction: column;
+        align-items: center;
+        gap: 15px;
+        padding: 16px 4%;
+    }
+
+    .navbar .logo {
+        justify-content: center;
+        font-size: 23px;
+    }
+
+    .navbar .logo img {
+        height: 62px !important;
+    }
+
+    .navbar .nav-links {
+        order: 0;
+        width: 100%;
+        justify-content: center;
+        gap: 22px;
+    }
+
+    .navbar .nav-buttons {
+        width: 100%;
+        justify-content: center;
+    }
+
+    .nav-links a {
+        font-size: 14px;
+    }
+
+    .nav-register {
+        padding: 10px 18px;
+    }
+
+    .hero {
+        padding: 70px 6%;
+    }
+
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .hero-description {
+        font-size: 15px;
+    }
+
+    .features {
+        padding: 60px 6%;
+    }
+
+    .section-heading h2 {
+        font-size: 26px;
+    }
+
+    .about {
+        padding: 55px 7%;
+    }
+
+    .dashboard-nav {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .dashboard-links {
+        gap: 12px;
+    }
+
+    .dashboard-container {
+        width: 94%;
+    }
+
+    .welcome-section {
+        padding: 22px;
+    }
+
+    .registration-container {
+        padding: 25px;
+    }
+}
+
+/* =========================================
+   MOBILE RESPONSIVENESS
+========================================= */
+
+@media (max-width: 480px) {
+
+    .navbar {
+        padding: 14px 12px;
+    }
+
+    .navbar .logo {
+        font-size: 21px;
+        gap: 9px;
+    }
+
+    .navbar .logo img {
+        height: 55px !important;
+        max-width: 75px;
+    }
+
+    .nav-links {
+        gap: 18px !important;
+    }
+
+    .nav-links a {
+        font-size: 13px;
+    }
+
+    .navbar .nav-buttons {
+        gap: 10px;
+    }
+
+    .navbar .nav-register {
+        padding: 9px 18px;
+        font-size: 13px;
+    }
+
+    .hero {
+        padding: 60px 5%;
+    }
+
+    .hero h1 {
+        font-size: 29px;
+    }
+
+    .tagline {
+        font-size: 11px;
+        letter-spacing: 2px;
+    }
+
+    .hero-description {
+        font-size: 14px;
+        line-height: 1.7;
+    }
+
+    .hero-content .nav-buttons {
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 280px;
+        margin: 25px auto 0;
+    }
+
+    .hero-content .nav-register {
+        width: 100%;
+    }
+
+    .feature-container {
+        grid-template-columns: 1fr;
+    }
+
+    .feature-card {
+        padding: 25px 20px;
+    }
+
+    .section-heading h2 {
+        font-size: 23px;
+    }
+
+    .search-container {
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .search-container button {
+        width: 100%;
+    }
+
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-links {
+        gap: 10px;
+    }
+
+    .dashboard-links a {
+        font-size: 12px;
+    }
+
+    .welcome-section h1 {
+        font-size: 21px;
+    }
+
+    .registration-container {
+        width: 94%;
+        padding: 20px;
+    }
+
+    footer .logo {
+        font-size: 21px;
+    }
+}
+
+/* =========================================
+   VERY SMALL MOBILE SCREENS
+========================================= */
+
+@media (max-width: 350px) {
+
+    .navbar .logo {
+        font-size: 18px;
+    }
+
+    .navbar .logo img {
+        height: 48px !important;
+        max-width: 65px;
+    }
+
+    .nav-links {
+        gap: 12px !important;
+    }
+
+    .navbar .nav-register {
+        padding: 8px 14px;
+        font-size: 12px;
+    }
+
+    .hero h1 {
+        font-size: 25px;
+    }
+
+    .hero-content .nav-register {
+        font-size: 13px;
+    }
+}
+
+/* =========================================
+   KNOWLEDGEHUB - CARD COLOR ENHANCEMENTS
+   Burgundy + Navy + Sage + Ivory
+========================================= */
+
+/* Dashboard Cards */
+
+.dashboard-card {
+    background: #FFFFFF;
+    border: 1px solid #E2D8CE;
+    border-top: 4px solid #713B4A;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(38, 59, 80, 0.07);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.dashboard-card:nth-child(4n + 1) {
+    background: #F5F0EE;
+    border-top-color: #713B4A;
+}
+
+.dashboard-card:nth-child(4n + 2) {
+    background: #EEF2EF;
+    border-top-color: #789184;
+}
+
+.dashboard-card:nth-child(4n + 3) {
+    background: #EDF0F3;
+    border-top-color: #263B50;
+}
+
+.dashboard-card:nth-child(4n + 4) {
+    background: #F5F1E9;
+    border-top-color: #B49A7A;
+}
+
+.dashboard-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(38, 59, 80, 0.13);
+}
+
+.dashboard-card h3 {
+    color: #263B50;
+}
+
+.dashboard-card p {
+    color: #59636B;
+    line-height: 1.7;
+}
+
+
+/* Homepage Feature Cards */
+
+.feature-card {
+    background: #FFFFFF;
+    border: 1px solid #E2D8CE;
+    border-radius: 16px;
+    box-shadow: 0 5px 18px rgba(38, 59, 80, 0.06);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:nth-child(1) {
+    background: #F5F0EE;
+    border-top: 4px solid #713B4A;
+}
+
+.feature-card:nth-child(2) {
+    background: #EEF2EF;
+    border-top: 4px solid #789184;
+}
+
+.feature-card:nth-child(3) {
+    background: #EDF0F3;
+    border-top: 4px solid #263B50;
+}
+
+.feature-card:nth-child(4) {
+    background: #F5F1E9;
+    border-top: 4px solid #B49A7A;
+}
+
+.feature-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 25px rgba(38, 59, 80, 0.12);
+}
+
+.feature-card h3 {
+    color: #263B50;
+}
+
+.feature-card p {
+    color: #59636B;
+    line-height: 1.8;
+}
+
+.feature-icon {
+    color: #713B4A;
+}
+
+
+/* Homepage Description */
+
+.hero-description {
+    color: #263B50;
+    line-height: 1.9;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+/* Homepage Section Descriptions */
+
+.section-heading > p {
+    color: #59636B;
+    line-height: 1.8;
+}
+
+.about p {
+    color: #59636B;
+    line-height: 1.9;
+}

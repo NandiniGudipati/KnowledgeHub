@@ -1,0 +1,55 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>My Profile | KnowledgeHub</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="registration-container">
+
+        <h1>My Expertise Profile</h1>
+
+        {% with messages = get_flashed_messages() %}
+            {% for message in messages %}
+                <div class="message">{{ message }}</div>
+            {% endfor %}
+        {% endwith %}
+
+        <h3>{{ employee.full_name }}</h3>
+
+        <p><strong>Email:</strong> {{ employee.email }}</p>
+
+        <p><strong>Department:</strong>
+            {{ employee.department or "Not added yet" }}</p>
+
+        <p><strong>Designation:</strong>
+            {{ employee.designation or "Not added yet" }}</p>
+
+        <p><strong>Experience:</strong>
+            {{ employee.experience_years or 0 }} years</p>
+
+        <h3>About Me</h3>
+
+        <p>{{ employee.bio or "No professional bio added yet." }}</p>
+
+        <a href="{{ url_for('edit_profile') }}"
+           class="nav-register">
+            Edit Profile
+        </a>
+
+        <p class="back-link">
+            <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+        </p>
+
+    </div>
+
+</body>
+</html>

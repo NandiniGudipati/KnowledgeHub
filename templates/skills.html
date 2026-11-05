@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Skills | KnowledgeHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="registration-container">
+        <h1>My Skills</h1>
+        <p>Add your technical and professional skills.</p>
+
+        {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <div class="message">{{ message }}</div>
+        {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <label>Skill Name</label>
+            <input type="text" name="skill_name" placeholder="Example: Python" required>
+
+            <label>Proficiency Level</label>
+            <select name="proficiency_level" required>
+                <option value="">Select Level</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+                <option value="Expert">Expert</option>
+            </select>
+
+            <button type="submit" class="register-btn">
+                Add Skill
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h2>Your Added Skills</h2>
+
+        {% if employee_skills %}
+        {% for skill in employee_skills %}
+
+        <div class="dashboard-card">
+            <h3>{{ skill.skill_name }}</h3>
+            <p>
+                Proficiency:
+                {{ skill.proficiency_level }}
+            </p>
+        </div>
+
+        {% endfor %}
+        {% else %}
+        <p>You haven't added any skills yet.</p>
+        {% endif %}
+
+        <p class="back-link">
+            <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+        </p>
+    </div>
+
+</body>
+
+</html>

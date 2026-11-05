@@ -1,0 +1,124 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Expertise Profile | KnowledgeHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="dashboard-nav">
+        <h2>KnowledgeHub</h2>
+
+        <div class="dashboard-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('profile') }}">My Profile</a>
+            <a href="{{ url_for('logout') }}" class="nav-register">Logout</a>
+        </div>
+    </nav>
+
+    <div class="registration-container">
+
+        <h2>My Expertise Profile</h2>
+
+        <p>
+            Your professional identity, technical skills and achievements
+            in one place.
+        </p>
+
+        <div class="dashboard-card">
+            <h3>Professional Information</h3>
+
+            <p><strong>Name:</strong> {{ employee.full_name }}</p>
+            <p><strong>Email:</strong> {{ employee.email }}</p>
+            <p><strong>Designation:</strong> {{ employee.designation or 'Not specified' }}</p>
+            <p><strong>Department:</strong> {{ employee.department or 'Not specified' }}</p>
+            <p><strong>Experience:</strong> {{ employee.experience_years or 0 }} years</p>
+            <p><strong>About:</strong> {{ employee.bio or 'No professional summary added yet.' }}</p>
+
+            <a href="{{ url_for('edit_profile') }}" class="nav-register">
+                Edit Profile
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>My Technical Skills</h3>
+
+            {% if all_skills %}
+                {% for skill in all_skills %}
+                    <p>
+                        <strong>{{ skill.skill_name }}</strong>
+                        — {{ skill.proficiency_level or 'Not specified' }}
+                    </p>
+                {% endfor %}
+            {% else %}
+                <p>No skills added yet.</p>
+            {% endif %}
+
+            <a href="{{ url_for('skills') }}" class="nav-register">
+                Manage Skills
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>My Projects</h3>
+
+            {% if all_projects %}
+                {% for project in all_projects %}
+                    <h4>{{ project.project_title }}</h4>
+                    <p>{{ project.project_description or 'No description provided.' }}</p>
+                    <p><strong>Technologies:</strong> {{ project.technologies_used or 'Not specified' }}</p>
+                    <p><strong>Role:</strong> {{ project.role_in_project or 'Not specified' }}</p>
+                {% endfor %}
+            {% else %}
+                <p>No projects added yet.</p>
+            {% endif %}
+
+            <a href="{{ url_for('projects') }}" class="nav-register">
+                Manage Projects
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>My Certifications</h3>
+
+            {% if all_certifications %}
+                {% for certificate in all_certifications %}
+                    <h4>{{ certificate.certification_name }}</h4>
+                    <p>
+                        <strong>Issuing Organization:</strong>
+                        {{ certificate.issuing_organization or 'Not specified' }}
+                    </p>
+
+                    {% if certificate.credential_url %}
+                        <p>
+                            <a href="{{ certificate.credential_url }}" target="_blank">
+                                View Certificate
+                            </a>
+                        </p>
+                    {% endif %}
+                {% endfor %}
+            {% else %}
+                <p>No certifications added yet.</p>
+            {% endif %}
+
+            <a href="{{ url_for('certifications') }}" class="nav-register">
+                Manage Certifications
+            </a>
+        </div>
+
+        <br>
+
+        <a href="{{ url_for('dashboard') }}" class="nav-register">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+</html>

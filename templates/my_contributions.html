@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Contributions | KnowledgeHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <nav class="dashboard-nav">
+        <h2>KnowledgeHub</h2>
+
+        <div class="dashboard-links">
+            <a href="{{ url_for('dashboard') }}">Dashboard</a>
+            <a href="{{ url_for('profile') }}">My Profile</a>
+            <a href="{{ url_for('logout') }}" class="nav-register">Logout</a>
+        </div>
+    </nav>
+
+    <div class="registration-container">
+
+        <h2>My Contributions</h2>
+
+        <p>
+            Track your knowledge-sharing activities and contributions
+            to the KnowledgeHub community.
+        </p>
+
+        <div class="dashboard-card">
+            <h3>Knowledge Articles Published</h3>
+            <h2>{{ article_count }}</h2>
+            <p>Technical knowledge articles shared by you.</p>
+
+            <a href="{{ url_for('articles') }}" class="nav-register">
+                View Articles
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Questions Asked</h3>
+            <h2>{{ question_count }}</h2>
+            <p>Questions you have posted to the community.</p>
+
+            <a href="{{ url_for('questions') }}" class="nav-register">
+                View Questions
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Answers Provided</h3>
+            <h2>{{ answer_count }}</h2>
+            <p>Answers you have contributed to other employees.</p>
+
+            <a href="{{ url_for('questions') }}" class="nav-register">
+                View Answers
+            </a>
+        </div>
+
+        <div class="dashboard-card">
+            <h3>Upvotes Received</h3>
+            <h2>{{ upvote_count }}</h2>
+            <p>Upvotes received on your answers from other employees.</p>
+
+            <a href="{{ url_for('questions') }}" class="nav-register">
+                Explore Q&A
+            </a>
+        </div>
+
+        <br>
+
+        <a href="{{ url_for('dashboard') }}" class="nav-register">
+            Back to Dashboard
+        </a>
+
+    </div>
+
+</body>
+</html>

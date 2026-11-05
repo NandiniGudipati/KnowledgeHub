@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>KnowledgeHub | Enterprise Knowledge Platform</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+
+        <div class="logo">
+            <img
+                src="{{ url_for('static', filename='Connected Knowledge Network Logo.png') }}"
+                alt="KnowledgeHub Logo"
+            >
+            <span>KnowledgeHub</span>
+        </div>
+
+        <div class="nav-links">
+            <a href="/">Home</a>
+            <a href="#features">Features</a>
+            <a href="#about">About</a>
+        </div>
+
+        <div class="nav-buttons">
+            <a href="{{ url_for('login') }}" class="nav-register">Login</a>
+            <a href="{{ url_for('register') }}" class="nav-register">Register</a>
+        </div>
+
+    </nav>
+
+
+    <!-- Hero Section -->
+    <section class="hero">
+
+        <div
+            class="hero-content"
+            style="
+                max-width: 1350px;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                flex-wrap: wrap;
+                gap: 30px;
+                text-align: left;
+            "
+        >
+
+            <!-- Hero Text -->
+            <div style="flex: 1 1 380px; min-width: 0;">
+
+                <p class="tagline">
+                    CONNECT • SHARE • GROW
+                </p>
+
+                <h1>
+                    Knowledge Connects Us.
+                    Expertise Moves Us Forward.
+                </h1>
+
+                <p class="hero-description" style="margin: 0 0 30px;">
+                    KnowledgeHub is an enterprise knowledge-sharing
+                    platform that connects employees, skills and ideas.
+                    Discover the right experts, exchange technical knowledge
+                    and collaborate to solve workplace challenges.
+                </p>
+
+                <div class="nav-buttons" style="justify-content: flex-start;">
+
+                    <a href="{{ url_for('register') }}" class="nav-register">
+                        Get Started
+                    </a>
+
+                    <a href="{{ url_for('login') }}" class="nav-register">
+                        Explore KnowledgeHub
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <!-- Larger Hero Image -->
+            <div style="flex: 1.3 1 500px; min-width: 0;">
+
+                <img
+                    src="{{ url_for('static', filename='knowledgehub_hero_visual.png') }}"
+                    alt="Connected knowledge network representing employee collaboration"
+                    style="
+                        display: block;
+                        width: 100%;
+                        max-width: 780px;
+                        height: 480px;
+                        object-fit: cover;
+                        margin-left: auto;
+                        border-radius: 14px;
+                        box-shadow: 0 12px 30px rgba(0, 0, 0, 0.22);
+                    "
+                >
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+
+        <div class="section-heading">
+
+            <p>EXPLORE KNOWLEDGEHUB</p>
+
+            <h2>One Platform. Endless Knowledge.</h2>
+
+            <p>
+                Discover the tools that make knowledge sharing
+                and employee collaboration easier.
+            </p>
+
+        </div>
+
+        <div class="feature-container">
+
+            <div class="feature-card">
+                <div class="feature-icon">👩‍💻</div>
+                <h3>Find Employee Experts</h3>
+                <p>
+                    Discover employees based on their skills,
+                    experience and technical expertise.
+                    Connect with the right people when you need help.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">📚</div>
+                <h3>Knowledge Sharing</h3>
+                <p>
+                    Create and explore technical knowledge articles.
+                    Share useful information, solutions and
+                    learning resources with your organization.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">💬</div>
+                <h3>Questions & Answers</h3>
+                <p>
+                    Ask technical questions, share solutions
+                    and learn from other employees.
+                    Upvote helpful answers and encourage collaboration.
+                </p>
+            </div>
+
+            <div class="feature-card">
+                <div class="feature-icon">🏆</div>
+                <h3>Expertise Profiles</h3>
+                <p>
+                    Showcase your professional skills,
+                    projects and certifications.
+                    Build your expertise profile and highlight your contributions.
+                </p>
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <!-- About Section -->
+    <section class="about" id="about">
+
+        <h2>Knowledge Grows When It Is Shared</h2>
+
+        <p>
+            Every organization has valuable knowledge and expertise
+            within its workforce. However, finding the right person
+            or information at the right time can be challenging.
+        </p>
+
+        <p>
+            KnowledgeHub bridges this gap by bringing employee
+            expertise, technical knowledge and collaboration
+            together in one centralized platform.
+        </p>
+
+    </section>
+
+
+    <!-- Call To Action Section -->
+    <section class="features">
+
+        <div class="section-heading">
+
+            <p>BE PART OF THE COMMUNITY</p>
+
+            <h2>Your Knowledge Can Make a Difference</h2>
+
+            <p>
+                Join KnowledgeHub and start sharing,
+                discovering and growing together.
+            </p>
+
+            <br>
+
+            <a href="{{ url_for('register') }}" class="nav-register">
+                Join KnowledgeHub
+            </a>
+
+        </div>
+
+    </section>
+
+
+    <!-- Footer -->
+    <footer>
+
+        <div class="logo">
+            <img
+                src="{{ url_for('static', filename='Connected Knowledge Network Logo.png') }}"
+                alt="KnowledgeHub Logo"
+            >
+            <span>KnowledgeHub</span>
+        </div>
+
+        <p>Connecting People With Knowledge.</p>
+
+        <p class="copyright">
+            © 2026 KnowledgeHub. All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Certifications | KnowledgeHub</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="registration-container">
+
+        <h1>My Certifications</h1>
+        <p>Showcase your professional achievements.</p>
+
+        {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <div class="message">{{ message }}</div>
+        {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <label>Certification Name</label>
+            <input type="text" name="certification_name" placeholder="Example: Python Programming" required>
+
+            <label>Issuing Organization</label>
+            <input type="text" name="issuing_organization" placeholder="Example: Microsoft">
+
+            <label>Certificate URL</label>
+            <input type="url" name="credential_url" placeholder="https://example.com/certificate">
+
+            <button type="submit" class="register-btn">
+                Add Certification
+            </button>
+
+        </form>
+
+        <hr>
+
+        <h2>Your Certifications</h2>
+
+        {% if employee_certifications %}
+        {% for cert in employee_certifications %}
+
+        <div class="dashboard-card">
+
+            <h3>{{ cert.certification_name }}</h3>
+
+            <p>
+                <strong>Organization:</strong>
+                {{ cert.issuing_organization or "Not specified" }}
+            </p>
+
+            
+
+            
+
+            
+            {% if cert.credential_url %}
+            <p>
+                <a href="{{ cert.credential_url }}" target="_blank" rel="noopener noreferrer">
+                    Verify Certificate
+                </a>
+            </p>
+            {% endif %}
+
+        </div>
+
+        {% endfor %}
+        {% else %}
+        <p>You haven't added any certifications yet.</p>
+        {% endif %}
+
+        <p class="back-link">
+            <a href="{{ url_for('dashboard') }}">Back to Dashboard</a>
+        </p>
+
+    </div>
+
+</body>
+
+</html>

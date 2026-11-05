@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Technical Knowledge Sharing | KnowledgeHub</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+
+    <div class="registration-container">
+
+        <h1>Share Technical Knowledge</h1>
+
+        <p>
+            Share your technical knowledge and help
+            other employees learn and grow.
+        </p>
+
+        {% with messages = get_flashed_messages() %}
+        {% for message in messages %}
+        <div class="message">{{ message }}</div>
+        {% endfor %}
+        {% endwith %}
+
+        <form method="POST">
+
+            <label>Topic Name</label>
+            <input type="text" name="topic_name" placeholder="Example: Python OOP Concepts" required>
+
+            <label>Description</label>
+            <textarea name="description" rows="8" placeholder="Share your technical knowledge here..."
+                required></textarea>
+
+            <button type="submit" class="register-btn">
+                Share Knowledge
+            </button>
+
+        </form>
+        <hr>
+
+        <h2>Shared Technical Knowledge</h2>
+        <!-- SEARCH KNOWLEDGE -->
+
+        <form method="GET" action="{{ url_for('articles') }}">
+
+            <input type="text" name="search" placeholder="Search by topic or keyword..." value="{{ search_query }}">
+
+            <button type="submit" class="register-btn">
+                Search
+            </button>
+
+            <a href="{{ url_for('articles') }}">
+                Clear Search
+            </a>
+
+        </form>
+
+        {% if all_articles %}
+
+        {% for article in all_articles %}
+
+        <div class="dashboard-card">
+
+            <h3>{{ article.topic_name }}</h3>
+
+            <p>
+                {{ article.description }}
+            </p>
+
+            <hr>
+
+            <p>
+                <strong>Shared by:</strong>
+                {{ article.full_name }}
+            </p>
+
+            <p>
+                <strong>Designation:</strong>
+                {{ article.designation or "Not specified" }}
+            </p>
+
+            <p>
+                <small>
+                    Published on: {{ article.created_at }}
+                </small>
+            </p>
+
+        </div>
+
+        {% endfor %}
+
+        {% else %}
+
+        <p>No technical knowledge has been shared yet.</p>
+
+        {% endif %}
+        <p class="back-link">
+            <a href="{{ url_for('dashboard') }}">
+                Back to Dashboard
+            </a>
+        </p>
+
+    </div>
+
+</body>
+
+</html>
